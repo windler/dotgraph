@@ -3,7 +3,8 @@
 
 ## Installation
 ```bash
-go get github.com/windler/dotgraph
+go get github.com/windler/dotgraph/graph
+go get github.com/windler/dotgraph/renderer
 ```
 
 If you want to render graphs make sure you have [graphviz](https://www.graphviz.org/) installed.
