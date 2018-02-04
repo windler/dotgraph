@@ -12,7 +12,7 @@ If you want to render graphs make sure you have [graphviz](https://www.graphviz.
 ## Usage
 ### Creating a new graph
 ```go
-graph := New("my_graph")
+graph := graph.New("my_graph")
 ```
 
 ### Adding nodes
@@ -77,9 +77,9 @@ graph.AddEdgeGraphPatternOptions("first", dotgraph.DotGraphOptions{
 
 ### Render a graph
 ```go
-renderer := &PNGRenderer{
+r := &renderer.PNGRenderer{
    OutputFile: "/tmp/my_graph.png",
 }
 
-renderer.Render(graph.String())
+r.Render(graph.String())
 ```
