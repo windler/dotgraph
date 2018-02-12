@@ -1,3 +1,4 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/windler/dotgraph)](https://goreportcard.com/report/github.com/windler/dotgraph) 
 # dotgraph
 `dotgraph` is a package that lets you create and render [graphviz dot graphs](https://www.graphviz.org/).
 
