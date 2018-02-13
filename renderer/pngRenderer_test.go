@@ -1,28 +1,23 @@
 package renderer
 
 import (
-	"io/ioutil"
-	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/windler/dotgraph/graph"
+	"github.com/windler/dotgraph/renderer/mocks"
 )
 
 func TestPngRenderer(t *testing.T) {
-	tmpDir, _ := ioutil.TempDir("", "godepgtest")
+	execMock := &mocks.DotExecutor{}
 
 	graph := graph.New("testgraph")
 	renderer := &PNGRenderer{
-		HomeDir: tmpDir,
-		Prefix:  "my.pkg",
+		OutputFile: "/tmp/out.png",
+		executor:   execMock,
 	}
 
+	execMock.On("Render", "/tmp/out.png.dot", "/tmp/out.png").Return(nil)
 	renderer.Render(graph.String())
 
-	files, _ := ioutil.ReadDir(tmpDir)
-
-	assert.True(t, len(files) == 2)
-	assert.True(t, strings.HasPrefix(files[0].Name(), "my_pkg"))
-	assert.True(t, strings.HasSuffix(files[0].Name(), "png"))
+	execMock.AssertExpectations(t)
 }

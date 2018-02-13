@@ -15,6 +15,19 @@ type PNGRenderer struct {
 	HomeDir    string
 	Prefix     string
 	OutputFile string
+	executor   DotExecutor
+}
+
+//DotExecutor creates a dot graph
+type DotExecutor interface {
+	Render(dotfile, outfile string) error
+}
+
+type dot struct{}
+
+func (e *dot) Render(dotfile, outfile string) error {
+	_, err := exec.Command("dot", "-Tpng", dotfile, "-o", outfile).Output()
+	return err
 }
 
 //Render renders graph content
@@ -29,7 +42,11 @@ func (r PNGRenderer) Render(graphContent string) {
 		log.Fatal("Error writing dot file.", err.Error())
 	}
 
-	_, err = exec.Command("dot", "-Tpng", dotFile, "-o", outFile).Output()
+	if r.executor == nil {
+		r.executor = &dot{}
+	}
+
+	err = (r.executor).Render(dotFile, outFile)
 	if err != nil {
 		log.Fatal("Error creating png.", err.Error())
 	}
