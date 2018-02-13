@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-//DotGraph create a directed graph in dot notation
+//DotGraph creates a directed graph in dot notation
 type DotGraph struct {
 	name               string
 	edges              map[string][]edge
@@ -21,6 +21,7 @@ type edge struct {
 	description string
 }
 
+//DotGraphOptions represents graphviz dot attributes
 type DotGraphOptions map[string]string
 
 //New creates a new Graph with a given name
