@@ -48,30 +48,42 @@ func (g DotGraph) AddNode(node string) {
 //GetDotFileContent create the content of a dot-file (graphviz)
 func (g DotGraph) String() string {
 	content := []string{"digraph " + g.name + " {"}
-	if graphStyle := createGraphOptionsString(g.graphOptions); graphStyle != "" {
-		content = append(content, "graph "+graphStyle)
-	}
-	if nodeStyle := createGraphOptionsString(g.nodeOptions); nodeStyle != "" {
-		content = append(content, "node "+nodeStyle)
-	}
-	if nodeStyle := createGraphOptionsString(g.edgeOptions); nodeStyle != "" {
-		content = append(content, "edge "+nodeStyle)
-	}
+	content = append(content, g.createGlobalAttributes()...)
 
 	for from, deps := range g.edges {
-		nodeStyle := g.createNodeOptionsPatternString(from)
-		content = append(content, from+nodeStyle)
+		nodeStylePattern := g.createNodeOptionsPatternString(from)
+		content = append(content, from+nodeStylePattern)
 
 		for _, to := range deps {
-			if from != `""` && to.nodeID != `""` {
-				edgeStyle := g.createEdgeOptionsPatternString(to.nodeID, to.description)
-				content = append(content, from+"->"+to.nodeID+edgeStyle)
+			if from == `""` && to.nodeID == `""` {
+				continue
 			}
+			edgeStyle := g.createEdgeOptionsPatternString(to.nodeID, to.description)
+			content = append(content, from+"->"+to.nodeID+edgeStyle)
 		}
 	}
+
 	content = append(content, "}")
 
 	return strings.Join(content, "\n")
+}
+
+func (g DotGraph) createGlobalAttributes() []string {
+	attr := []string{}
+	graphStyle := createGraphOptionsString(g.graphOptions)
+	nodeStyle := createGraphOptionsString(g.nodeOptions)
+	edgeStyle := createGraphOptionsString(g.edgeOptions)
+
+	if graphStyle != "" {
+		attr = append(attr, "graph "+graphStyle)
+	}
+	if nodeStyle != "" {
+		attr = append(attr, "node "+nodeStyle)
+	}
+	if edgeStyle != "" {
+		attr = append(attr, "edge "+nodeStyle)
+	}
+	return attr
 }
 
 func (g DotGraph) createEdgeOptionsPatternString(to, description string) string {
