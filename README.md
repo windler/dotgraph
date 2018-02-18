@@ -1,4 +1,5 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/windler/dotgraph)](https://goreportcard.com/report/github.com/windler/dotgraph) [![CircleCI](https://circleci.com/gh/windler/dotgraph.svg?style=svg)](https://circleci.com/gh/windler/dotgraph)
+[![Go Report Card](https://goreportcard.com/badge/github.com/windler/dotgraph)](https://goreportcard.com/report/github.com/windler/dotgraph) [![CircleCI](https://circleci.com/gh/windler/dotgraph.svg?style=svg)](https://circleci.com/gh/windler/dotgraph) [![codebeat badge](https://codebeat.co/badges/ea2758da-b3f2-4de0-a051-effee8d9d499)](https://codebeat.co/projects/github-com-windler-dotgraph-master)
+
 # dotgraph
 `dotgraph` is a package that lets you create and render [graphviz dot graphs](https://www.graphviz.org/).
 
