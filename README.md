@@ -33,14 +33,14 @@ You can apply any [dot attributes](https://graphviz.gitlab.io/_pages/doc/info/at
 
 #### Graph attributes
 ```go
-graph.SetGraphOptions(DotGraphOptions{
+graph.SetGraphOptions(dotgraph.DotGraphOptions{
     "bgcolor": "#333333",
 })
 ```
 
 #### Global node attributes
 ```go
-graph.SetGraphOptions(dotgraph.DotGraphOptions{
+graph.SetNodeGraphOptions(dotgraph.DotGraphOptions{
     "fillcolor": "#336699",
     "style":     "filled",
     "fontcolor": "white",
