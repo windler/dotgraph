@@ -81,7 +81,7 @@ func (g DotGraph) createGlobalAttributes() []string {
 		attr = append(attr, "node "+nodeStyle)
 	}
 	if edgeStyle != "" {
-		attr = append(attr, "edge "+nodeStyle)
+		attr = append(attr, "edge "+edgeStyle)
 	}
 	return attr
 }

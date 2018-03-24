@@ -30,6 +30,14 @@ func TestDotFile(t *testing.T) {
 		"bgcolor": "#333333",
 	})
 
+	g.SetEdgeGraphOptions(DotGraphOptions{
+		"edgeattr": "edgeval",
+	})
+
+	g.SetNodeGraphOptions(DotGraphOptions{
+		"nodeattr": "nodeval",
+	})
+
 	assert.Equal(t, 4, len(g.edges))
 	assert.Equal(t, 2, len(g.edges[`"nodeA"`]))
 	assert.Equal(t, 0, len(g.edges[`"nodeB"`]))
@@ -38,6 +46,8 @@ func TestDotFile(t *testing.T) {
 
 	dotFile := g.String()
 	assert.True(t, strings.Contains(dotFile, `digraph test_graph`))
+	assert.True(t, strings.Contains(dotFile, `node [nodeattr="nodeval"]`))
+	assert.True(t, strings.Contains(dotFile, `edge [edgeattr="edgeval"]`))
 	assert.True(t, strings.Contains(dotFile, `"nodeA"->"nodeB"`))
 	assert.True(t, strings.Contains(dotFile, `"nodeA"->"nodeC"`))
 	assert.True(t, strings.Contains(dotFile, `"nodeC"->"nodeB"[label="fancy"]`))
