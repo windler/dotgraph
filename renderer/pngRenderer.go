@@ -1,7 +1,6 @@
 package renderer
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -35,8 +34,6 @@ func (r PNGRenderer) Render(graphContent string) {
 	outFile := r.getOutputFile()
 	dotFile := outFile + ".dot"
 
-	fmt.Println(graphContent)
-
 	err := ioutil.WriteFile(dotFile, []byte(graphContent), os.ModePerm)
 	if err != nil {
 		log.Fatal("Error writing dot file.", err.Error())
@@ -50,8 +47,6 @@ func (r PNGRenderer) Render(graphContent string) {
 	if err != nil {
 		log.Fatal("Error creating png.", err.Error())
 	}
-
-	fmt.Println("Written to " + outFile)
 }
 
 func (r PNGRenderer) getOutputFile() string {
